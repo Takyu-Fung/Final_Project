@@ -1007,7 +1007,7 @@ void editorProcessKeypress(){
             editorInsertNewline();
             break;
 
-        case CTRL_KEY('q'):
+        case CTRL_KEY('z'):
             if (E.dirty && quit_times > 0) {
                 editorSetStatusMessage("WARNING!!! File has unsaved changes. "
                 "Press Ctrl-Q %d more times to quit.", quit_times);
@@ -1020,7 +1020,7 @@ void editorProcessKeypress(){
             exit(0);
             break;
 
-        case CTRL_KEY('s'):
+        case CTRL_KEY('x'):
             editorSave();
             break;
 
@@ -1105,22 +1105,11 @@ int main(int argc, char *argv[]) {
         editorOpen(argv[1]);
     }
 
-    editorSetStatusMessage("HELP: Ctrl-S = save | Ctrl-Q = quit | Ctrl-F = find");
+    editorSetStatusMessage("HELP: Ctrl-X = save | Ctrl-Z = quit | Ctrl-F = find");
 
     while(1){
         editorRefreshScreen();
         editorProcessKeypress();
-        /*
-        char c = '\0';
-        if(read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) die("read");
-        if(iscntrl(c)){
-            printf("%d\r\n", c);
-        }
-        else{
-            printf("%d ('%c')\r\n", c, c);
-        }
-        if (c == CTRL_KEY('q')) break;
-        */
     }
 
     return 0;
